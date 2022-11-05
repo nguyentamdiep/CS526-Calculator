@@ -25,10 +25,11 @@ async function storeData(value){
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem('@storage_Key6', jsonValue);
-    console.log('luu thanh cong');
+   // console.log('luu thanh cong');
   } catch {
+    return;
     // saving error
-    console.log('luu that bai');
+   // console.log('luu that bai');
   }
 };
 
@@ -45,11 +46,12 @@ async function getData(arr) {
           }
     
     
-    console.log('read data thanh cong');
+  //  console.log('read data thanh cong');
    // jsonValue != null ? JSON.parse(jsonValue) : 
   } catch{
+    return;
     // error reading value
-    console.log('read data that bai');
+  //  console.log('read data that bai');
     
   }
 }
