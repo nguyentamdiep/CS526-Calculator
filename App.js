@@ -230,7 +230,12 @@ const App = () => {
       </SafeAreaView>
     );
   };
-
+  function clear()
+  {
+    setHistory([]);
+    setSearch([]);
+    AsyncStorage.clear();
+  }
   const History = props => {
     
     const {navigation} = props;
@@ -238,7 +243,7 @@ const App = () => {
     return (
       <SafeAreaView style={styles.container}>
         {/* <Text style={[styles.searchTitle]}>History</Text> */}
-        <View style={[styles.historyButton]}>
+        <View style={styles.historyButton}>
           <View style={[styles.backButton]}>
             <Button
               title="Back"
@@ -246,7 +251,16 @@ const App = () => {
               color="#3BBD00"
             />
           </View>
+          <View style={[styles.clearButton]}>
+            <Button
+              title="Clear"
+              onPress={() => {clear()}
+              }
+              color="#3BBD00"
+            />
+          </View>
         </View>
+        
         <Text style={[styles.title]}>History</Text>
         <TextInput
           style={styles.searchBg}
@@ -268,14 +282,14 @@ const App = () => {
           
         />
 
-        
+        <ScrollView>
         <FlatList
          
           data={search}
           renderItem={showSearchResultItem}
           keyExtractor={item => item.id}
         />
-        
+        </ScrollView>
       </SafeAreaView>
     );
   };
@@ -316,11 +330,6 @@ const styles = StyleSheet.create({
     //backgroundColor: '#C5C4C4',
   },
 
-  historyButton: {
-    width: 100,
-    height: 40,
-    padding: 2,
-  },
 
   row: {
     padding: 5,
@@ -358,12 +367,24 @@ const styles = StyleSheet.create({
     position: 'absolute',
     //backgroundColor: CUSTOM_COLOR.Black,
   },
+  historyButton: {
+    width: '100%',
+    height: 40,
+    //padding: 2,
+    flexDirection: 'row',
+    alignContent: 'space-between',
+    justifyContent: 'center',
+  },
 
   backButton: {
     width: 100,
     height: 40,
   },
-
+  clearButton: {
+    width: 100,
+    height: 40,
+    alignSelf: 'flex-end',
+  },
   searchBg: {
     marginTop: 50,
     marginLeft: 30,
